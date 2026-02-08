@@ -1,21 +1,26 @@
+# Getting Started
+
+Build Containers
+```
+docker compose up -d
+```
 
 
-notes 
+Pull Model
+```
+docker exec -it ollama ollama pull gpt-oss:20b
+```
 
-- NVIDIA GPU is required
-- NVIDIA Container Toolkit is required
-- NVIDIA drivers are required
-- NVIDIA Container Toolkit is required
+> Explore different models!
+> qwen3:8b is a good one for general purpose use, it's fast and accurate.
+> # for code generation, use gpt-oss:20b
 
-On Omarchy (Arch-based), use this to get NVIDIA GPU working with Docker:
-1. NVIDIA driver (if not already installed)
-# For most GPUs (kernel modules from Arch repo)sudo pacman -S nvidia# If you need DKMS (e.g. custom kernel): nvidia-dkms
-Reboot after installing the driver. Check with:
-nvidia-smi
-2. NVIDIA Container Toolkit
-sudo pacman -S nvidia-container-toolkit
-3. Configure Docker to use the NVIDIA runtime
-sudo nvidia-ctk runtime configure --runtime=docker
-4. Restart Docker
-sudo systemctl restart docker
-5
+Open your browser to http://127.0.0.1:8080 to start using the UI.
+
+# Burn it All Down
+
+```
+# Stop all containers
+docker compose down
+docker stop $(docker ps -aq) 2>/dev/null; docker rm $(docker ps -aq) 2>/dev/null; docker volume rm $(docker volume ls -q)
+```
