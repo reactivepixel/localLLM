@@ -5,22 +5,34 @@ Build Containers
 docker compose up -d
 ```
 
-
 Pull Model
 ```
 docker exec -it ollama ollama pull gpt-oss:20b
 ```
 
-> Explore different models!
-> qwen3:8b is a good one for general purpose use, it's fast and accurate.
-> # for code generation, use gpt-oss:20b
+### Other Models to Choose From (from ollama)
+
+[List of current models](https://ollama.com/search?c=tools) Choose a model and run the command below to pull it.
+
+```
+docker exec -it ollama ollama pull <model_name>:<size>
+```
+
+Example:
+```
+docker exec -it ollama ollama pull qwen3:8b
+```
+# Use it!
 
 Open your browser to http://127.0.0.1:8080 to start using the UI.
 
-# Burn it All Down
-
+# Start/ Stop the Services Commands
 ```
-# Stop all containers
+docker compose up -d
 docker compose down
-docker stop $(docker ps -aq) 2>/dev/null; docker rm $(docker ps -aq) 2>/dev/null; docker volume rm $(docker volume ls -q)
+```
+
+# Burn it All Down
+```
+docker compose down --volumes --rmi all --remove-orphans
 ```
